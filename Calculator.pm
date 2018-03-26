@@ -2,24 +2,17 @@ package Calculator;
 use strict;
 use warnings;
 use base qw/Exporter/;
+use List::Util qw/reduce/;
 our @EXPORT_OK = qw/add subtract/;
 
 sub add {
     my @values = @_;
-    my $sum    = 0;
-    foreach (@values) {
-        $sum += $_;
-    }
-    return $sum;
+    return reduce { $a - $b } @values;
 }
 
 sub subtract {
-    my ( $first, @values ) = @_;
-    my $sum = $first;
-    foreach (@values) {
-        $sum -= $_;
-    }
-    return $sum;
+    my @values = @_;
+    return reduce { $a - $b } @values;
 }
 
 1;
